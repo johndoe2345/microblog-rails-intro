@@ -1,0 +1,14 @@
+<h1 data-confirm="hello!">Listing all users</h1>
+
+<p><%= link_to 'new user', new_user_path %></p>
+
+<ul>
+	<% @users.each do |user| %>
+		<!-- double quotes needed for interpolation (var in string) -->
+		<li><%= link_to user.username, "#{user.username}" %> | 
+			<%= link_to 'edit', edit_user_path(user) %> | 
+			<%= link_to 'delete', user_path(user), method: :delete, data: {confirm: "Are you sure?"} %></li>
+		
+	<% end %>
+</ul>
+

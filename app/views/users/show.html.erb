@@ -1,0 +1,12 @@
+<h1><%= @user.username %></h1>
+<p>(<%= @user.email %>) <%= @user.about_me %></p>
+
+<h3><%= @user.fname %>'s Posts</h3>
+
+<ul>
+	<% @user.posts.each do |post| %>
+	<li><%= link_to post.subject, post %></li>
+	<% end %>
+</ul>
+
+<%= link_to 'back', users_path %> | <%= link_to 'edit', edit_user_path(@user) %>
