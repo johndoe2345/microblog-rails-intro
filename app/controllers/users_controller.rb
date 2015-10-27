@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.create(params[:user])
+  	@user = User.create(user_params)
   	redirect_to @user, notice: "New user created." # @user is the same as user_path(@user.id)
   end
 
   def update
-  	@user.update(params[:user])
+  	@user.update(user_params)
   	redirect_to @user, notice: "User successfully updated."
   end
 
@@ -41,6 +41,10 @@ class UsersController < ApplicationController
 
   def set_user
   	@user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:fname, :lname, :email, :password, :username, :about_me)
   end
 
 end
