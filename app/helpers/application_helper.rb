@@ -1,5 +1,5 @@
 module ApplicationHelper
 	def current_user
-  		session[:user_id] ? User.find(session[:user_id]) : nil
+  		session[:id] ? User.find(session[:id]) : nil
   	end
 end

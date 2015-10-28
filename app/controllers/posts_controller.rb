@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(params[:post].merge(user_id: current_user.id))
+    @post = Post.create(post_params.merge(user_id: current_user.id))
     # also could have done:
     # @post = Post.new(params[:post])
     # @post.user = current_user
@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update(params[:post])
+    @post.update(post_params)
     redirect_to @post, notice: "Post successfully updated."
   end
 
@@ -38,6 +38,10 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:subject, :body, :user_id)
   end
 
 end

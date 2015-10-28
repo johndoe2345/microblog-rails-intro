@@ -5,7 +5,7 @@
 
 <ul>
 	<% @user.posts.each do |post| %>
-	<li><%= link_to post.subject, post %></li>
+	<li><%= link_to post.subject, post %> <%= time_ago_in_words(post.created_at) %> ago...</li>
 	<% end %>
 </ul>
 
