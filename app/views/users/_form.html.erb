@@ -1,4 +1,4 @@
-<%= form_for @user do |n| %>
+<%= form_for @user, html: { multipart: true } do |n| %>
 	<%= n.label :email %>
 	<%= n.text_field :email %><br />
 
@@ -16,6 +16,9 @@
 
 	<%= n.label :about_me %>
 	<%= n.text_area :about_me %><br />
+
+	<%= n.label :avatar %>
+	<%= n.file_field :avatar %><br />
 
 	<%= n.submit %>
 <% end %>

@@ -2,6 +2,8 @@
 	<p>Hello <%= current_user.fname %> | 
 		<%= link_to 'sign out', logout_path, method: :delete %>
 			| 
+		<%= link_to 'the feed', posts_path %>
+			| 
 		<%= link_to 'new post', new_post_path %>
 	</p>
 <% else %>

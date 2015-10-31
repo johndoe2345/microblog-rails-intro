@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    session[:id] = nil
   	@user.destroy
   	redirect_to users_path, notice: "User deleted."
   end
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:fname, :lname, :email, :password, :username, :about_me)
+    params.require(:user).permit(:fname, :lname, :email, :password, :username, :about_me, :avatar)
   end
 
 end

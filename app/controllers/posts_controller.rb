@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :show, :destroy]
   def index
     @posts = Post.all
+    @recent = Post.order("created_at DESC").limit(10)
   end
 
   def new
@@ -20,7 +21,6 @@ class PostsController < ApplicationController
     # @post = Post.new(params[:post])
     # @post.user = current_user
     # @post.save
-    
     redirect_to @post, notice: "New post created."
   end
 
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:subject, :body, :user_id)
+    params.require(:post).permit(:subject, :body, :image, :user_id)
   end
 
 end

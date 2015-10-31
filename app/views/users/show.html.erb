@@ -1,10 +1,15 @@
 <h1><%= @user.username %></h1>
+<% if @user.avatar.url(:medium) != '/avatars/medium/missing.png' %>
+	<%= image_tag @user.avatar.url(:medium) %>
+<% else %>
+	<%= image_tag 'empty_avatar.gif', size: '300x300' %>
+<% end %>
 <p>(<%= @user.email %>) <%= @user.about_me %></p>
 
-<h3><%= @user.fname %>'s Posts</h3>
+<h3><%= @user.full_name %>'s Posts</h3>
 
 <ul>
-	<% @user.posts.each do |post| %>
+	<% @user.posts.reverse.each do |post| %>
 	<li><%= link_to post.subject, post %> <%= time_ago_in_words(post.created_at) %> ago...</li>
 	<% end %>
 </ul>

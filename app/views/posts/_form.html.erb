@@ -1,9 +1,12 @@
-<%= form_for @post do |n| %>
+<%= form_for @post, html: { multipart: true } do |n| %>
 	<%= n.label :subject %>
 	<%= n.text_field :subject %><br />
 
 	<%= n.label :body %>
-	<%= n.text_field :body %><br />
+	<%= n.text_area :body, :maxlength => 150, rows: 10, cols: 30 %><br />
+
+	<%= n.label :image %>
+	<%= n.file_field :image %><br />
 
 	<%= n.submit %>
 <% end %>
