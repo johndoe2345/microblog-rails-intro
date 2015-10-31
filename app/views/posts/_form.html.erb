@@ -1,8 +1,8 @@
 <%= form_for @post, html: { multipart: true } do |n| %>
 	<%= n.label :subject %>
-	<%= n.text_field :subject %><br />
+	<%= n.text_field :subject, :required => true %><br />
 
-	<%= n.label :body %>
+	<%= n.label :body, 'Post:' %>
 	<%= n.text_area :body, :maxlength => 150, rows: 10, cols: 30 %><br />
 
 	<%= n.label :image %>

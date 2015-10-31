@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   	# if this stuff is true then do this action else if its false then do this action.
 
   	# if session[:user_id]
-  	# 	User.find(session[:user_id])
+  	# 	User.find(session[:id])
   	# else
   	# 	nil
   	# end

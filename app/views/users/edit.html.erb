@@ -1,5 +1,13 @@
-<h1>Edit User</h1>
+<% if current_user and current_user.id.to_i == params[:id].to_i %>
+	<h1>Edit User</h1>
 
-<%= render 'form' %>
-<br />
-<%= link_to 'cancel', users_path %>
+	<%= render 'form' %>
+	<br />
+	If you would like to deactivate your account, keep in mind that it CANNOT be undone! We'd hate to see ya go, but if you really want to, then here ya go: 
+	<%= link_to 'delete', user_path(current_user.id), method: :delete, data: {confirm: "Are you sure?"} %>
+	<br />
+	<%= link_to 'cancel', users_path %>
+<% else %>
+	<h1>oops! you wandered into the forbidden zone! Try <%= link_to 'here', root_path %> instead!</h1>
+
+<% end %>

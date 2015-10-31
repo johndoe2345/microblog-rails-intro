@@ -1,23 +1,23 @@
 <%= form_for @user, html: { multipart: true } do |n| %>
-	<%= n.label :email %>
-	<%= n.text_field :email %><br />
+	<%= n.label :email, 'Email Address' %>
+	<%= n.text_field :email, :required => true %>*<br />
 
 	<%= n.label :password %>
-	<%= n.password_field :password %><br />
+	<%= n.password_field :password, :required => true %>*<br />
 
-	<%= n.label :username %>
-	<%= n.text_field :username %><br />
+	<%= n.label :username, 'Username' %>
+	<%= n.text_field :username, :required => true %>*<br />
 
-	<%= n.label :fname %>
+	<%= n.label :fname, 'First Name' %>
 	<%= n.text_field :fname %><br />
 
-	<%= n.label :lname %>
+	<%= n.label :lname, 'Last Name' %>
 	<%= n.text_field :lname %><br />
 
-	<%= n.label :about_me %>
+	<%= n.label :about_me, 'About Me' %>
 	<%= n.text_area :about_me %><br />
 
-	<%= n.label :avatar %>
+	<%= n.label :avatar, 'Profile Pic' %>
 	<%= n.file_field :avatar %><br />
 
 	<%= n.submit %>

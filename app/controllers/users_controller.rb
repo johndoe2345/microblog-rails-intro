@@ -20,8 +20,10 @@ class UsersController < ApplicationController
   	@user = User.where(username: params[:username])
   end
 
+#need to fix create and update for required fields!!!!!!!!!!!!!!!
   def create
   	@user = User.create(user_params)
+    session[:id] = @user.id
   	redirect_to @user, notice: "New user created." # @user is the same as user_path(@user.id)
   end
 
@@ -31,9 +33,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    session[:id] = nil
-  	@user.destroy
-  	redirect_to users_path, notice: "User deleted."
+    if session[:id] == @user.id
+      session[:id] = nil
+    	@user.destroy
+    	redirect_to root_path, notice: "User deleted."
+    else
+      redirect_to root_path, alert: "Unable to process request"
+    end
   end
 
   private

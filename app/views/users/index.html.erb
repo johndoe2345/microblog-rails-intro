@@ -4,18 +4,14 @@
 
 <ul>
 	<% @users.each do |user| %>
-		<!-- double quotes needed for interpolation (var in string) -->
 		<li>
 			<% if user.avatar.url(:thumb) != '/avatars/thumb/missing.png' %>
 				<%= image_tag user.avatar.url(:thumb) %>
 			<% else %>
 				<%= image_tag 'empty_avatar.gif', size: '50x50' %>
 			<% end %>
-			<%= link_to user.username, user_path(user) %> 
-			<!-- <%= link_to user.username, "#{user.username}" %> -->| 
-			<%= link_to 'edit', edit_user_path(user) %> | 
-			<%= link_to 'delete', user_path(user), method: :delete, data: {confirm: "Are you sure?"} %></li>
-		
+			<%= link_to user.username, user_path(user) %>
+		</li>
 	<% end %>
 </ul>
 

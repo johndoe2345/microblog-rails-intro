@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :posts
 
   post '/signin', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  delete '/signout', to: 'sessions#destroy'
 
   # get 'users', to: 'users#index'
 
