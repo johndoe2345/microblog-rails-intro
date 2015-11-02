@@ -1,13 +1,13 @@
-<h1><%= @post.user_id %></h1>
-<p>(<%= @post.subject %>) <%=simple_format @post.body %></p>
+<h1><%= @post.subject %></h1>
+<p><%=simple_format @post.body %></p>
 <% if @post.image.url(:medium) != '/images/medium/missing.png' %>
 	<%= image_tag @post.image.url(:medium) %>
 <% else %>
 	<% nil %>
 <% end %>
 <% if current_user && current_user.id == @post.user_id %>
-	<%= link_to 'edit', edit_post_path(@post) %> | 
-	<%= link_to 'delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+	<p><%= link_to 'edit', edit_post_path(@post) %> | 
+	<%= link_to 'delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %></p>
 <% else %>
 	<% nil %>
 <% end %>

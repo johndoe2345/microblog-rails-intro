@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :show, :destroy]
   def index
     @posts = Post.all
-    @recent = Post.order("created_at DESC").limit(10)
+    @recent = Post.order("created_at DESC")
   end
 
   def new
@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    
   end
 
   def create

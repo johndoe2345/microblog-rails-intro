@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :destroy]
+  before_action :set_user, only: [:edit, :update, :show, :destroy, :follow, :unfollow, :following?, :remove_avatar]
 	# list all users
   def index
   	@users = User.all
@@ -15,12 +15,16 @@ class UsersController < ApplicationController
   def show
   end
 
-  # displays a user profile
-  def profile
-  	@user = User.where(username: params[:username])
+  def follow
+    Follow.create(followee_id: params[:id], follower_id: current_user.id)
+    redirect_to @user, notice: "Followed!"
   end
 
-#need to fix create and update for required fields!!!!!!!!!!!!!!!
+  def unfollow
+    Follow.where(followee_id: params[:id], follower_id: current_user.id).first.destroy
+    redirect_to @user, notice: "Unfollowed!"
+  end
+
   def create
   	@user = User.create(user_params)
     session[:id] = @user.id

@@ -4,14 +4,30 @@
 <% else %>
 	<%= image_tag 'empty_avatar.gif', size: '300x300' %>
 <% end %>
+<p><% if current_user && @user != current_user && !current_user.following?(@user) %>
+		<%= link_to "Follow #{@user.username}", follow_user_path(@user), method: :post %>
+	<% elsif current_user && @user != current_user && current_user.following?(@user) %>
+		<%= link_to "Unfollow #{@user.username}", unfollow_user_path(@user), method: :delete, data: {confirm: "Are you sure you want to unfollow #{@user.username}?"} %>
+	<% else %>
+		<%= nil %>
+	<% end %></p>
 <p>(<%= @user.email %>) <%= @user.about_me %></p>
-
+<h3>who <%= @user.full_name %> is following</h3>
+<ul>
+	<% @user.follows.each do |follow| %>
+		<li><% if follow.user.avatar.url(:thumb) != '/avatars/thumb/missing.png' %>
+				<%= link_to (image_tag follow.user.avatar.url(:thumb)), user_path(follow.user) %>
+			<% else %>
+				<%= link_to (image_tag 'empty_avatar.gif', size: '50x50'), user_path(follow.user) %>
+			<% end %>
+			<%= link_to follow.user.full_name, user_path(follow.user) %></li>
+	<% end %>
+</ul>
 <h3><%= @user.full_name %>'s Posts</h3>
-
 <ul>
 	<% @user.posts.reverse.each do |post| %>
-	<li><%= link_to post.subject, post %> <%= time_ago_in_words(post.created_at) %> ago...</li>
+		<li><%= link_to post.subject, post %> <%= time_ago_in_words(post.created_at) %> ago...</li>
 	<% end %>
 </ul>
 
-<%= link_to 'back', users_path %> | <%= link_to 'edit', edit_user_path(@user) %>
+<%= link_to 'back', users_path %>

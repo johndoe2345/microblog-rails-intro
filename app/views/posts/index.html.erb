@@ -5,12 +5,14 @@
 <% end %>
 
 <ul>
+	<% x=0 %>
 	<% @recent.each do |post| %>
+		<% next if !current_user.following?(post.user) unless !current_user || post.user_id == current_user.id %>
 		<li>
 			<% if post.user.avatar.url(:thumb) != '/avatars/thumb/missing.png' %>
-				<%= image_tag post.user.avatar.url(:thumb) %>
+				<%= link_to (image_tag post.user.avatar.url(:thumb)), user_path(post.user) %>
 			<% else %>
-				<%= image_tag 'empty_avatar.gif', size: '50x50' %>
+				<%= link_to (image_tag 'empty_avatar.gif', size: '50x50'), user_path(post.user) %>
 			<% end %>
 			<%= link_to post.subject, post_path(post) %>
 			<%= link_to post.body, post_path(post) %>
@@ -19,7 +21,10 @@
 			<% else %>
 				<% nil %>
 			<% end %>
+			 <%= time_ago_in_words(post.created_at) %> ago...
 		</li>
+		<% x+=1 %>
+		<% break if x>=10 %>
 	<% end %>
 </ul>
 

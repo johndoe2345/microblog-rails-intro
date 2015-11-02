@@ -8,13 +8,13 @@ class SessionsController < ApplicationController
 		else
 			flash[:alert] = "Something went wrong."
 		end
-		redirect_to root_path
+		redirect_to :back
 	end
 
 	def destroy
 		session[:id] = nil
 		flash[:notice] = "Logged out."
-		redirect_to root_path
+		redirect_to :back
 	end
 
 end

@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
+  post '/users/:id/follow', to: 'users#follow', as: 'follow_user'
+  delete '/users/:id/unfollow', to: 'users#unfollow', as: 'unfollow_user'
+
   # get 'users', to: 'users#index'
 
   # as: creates helper route, to be subbed as simply user_path instead of "users/:username" in code
-  get ':username', to: 'users#profile', as: 'user_profile'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

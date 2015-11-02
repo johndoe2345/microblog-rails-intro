@@ -1,2 +1,9 @@
-
-<h1><%= link_to 'hello world', posts_path %></h1>
+<br />
+<% if current_user %>
+	<h1><%= "welcome #{current_user.fname}!" %></h1>
+<% else %>
+	<h1>welcome, stranger!</h1>
+	<h2>sign up above to start your new journey with us!</h2>
+	<br />
+	<h3>or check out <%= link_to "what people are saying", posts_path %> before you sign up</h3>
+<% end %>

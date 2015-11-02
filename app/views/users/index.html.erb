@@ -1,16 +1,21 @@
-<h1 data-confirm="hello!">Listing all users</h1>
+<h1 data-confirm="hello!">Find friends</h1>
 
-<p><%= link_to 'new user', new_user_path %></p>
 
 <ul>
 	<% @users.each do |user| %>
 		<li>
 			<% if user.avatar.url(:thumb) != '/avatars/thumb/missing.png' %>
-				<%= image_tag user.avatar.url(:thumb) %>
+				<%= link_to (image_tag user.avatar.url(:thumb)), user_path(user) %>
 			<% else %>
-				<%= image_tag 'empty_avatar.gif', size: '50x50' %>
+				<%= link_to (image_tag 'empty_avatar.gif', size: '50x50'), user_path(user) %>
 			<% end %>
 			<%= link_to user.username, user_path(user) %>
+			<% if !user.about_me.empty? %>
+				 - 
+			<% else %>
+				<%= nil %>
+			<% end %>
+			<%= user.about_me %>
 		</li>
 	<% end %>
 </ul>

@@ -1,20 +1,26 @@
-<p><%= link_to 'helloworld', root_path %>
 <% if current_user %>
+	<p><%= link_to 'helloworld', root_path %>
 	Hello <%= current_user.fname %> | 
-	<%= link_to 'sign out', signout_path, method: :delete %>
+	<%= link_to 'new post', new_post_path %>
 		| 
-	<%= link_to 'settings', edit_user_path(current_user.id) %>
+	<%= link_to 'my profile', user_path(current_user.id) %>
 		| 
 	<%= link_to 'the feed', posts_path %>
 		| 
-	<%= link_to 'new post', new_post_path %>
+	<%= link_to 'find friends', users_path %>
+		| 
+	<%= link_to 'settings', edit_user_path(current_user.id) %>
+		| 
+	<%= link_to 'sign out', signout_path, method: :delete %></p>
 <% else %>
-	<%= form_tag(signin_path, method: :post) do %>
+	<p><%= form_tag(signin_path, method: :post) do %>
 		<%= label_tag :username %>
 		<%= text_field_tag :username, nil, {placeholder: "username..."} %>
 		<%= label_tag :password %>
 		<%= password_field_tag :password, nil, {placeholder: "password..."}  %>
 		<%= submit_tag "login" %> | 
 		<%= link_to 'sign up', new_user_path %>
-	<% end %>
-<% end %></p>
+	<% end %></p>
+	<h1><%= link_to 'hello world', root_path %></h1>
+<% end %>
+<hr>
