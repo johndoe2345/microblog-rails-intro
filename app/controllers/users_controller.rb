@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :destroy, :follow, :unfollow, :following?, :remove_avatar]
+  before_action :set_user, only: [:edit, :update, :show, :destroy, :follow, :unfollow]
 	# list all users
   def index
   	@users = User.all
@@ -26,14 +26,23 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.create(user_params)
-    session[:id] = @user.id
-  	redirect_to @user, notice: "New user created." # @user is the same as user_path(@user.id)
+    @user = User.new(user_params)
+  	if @user.save
+      session[:id] = @user.id
+    	redirect_to @user, notice: "New user created." # @user is the same as user_path(@user.id)
+    else
+      flash[:alert] = "Something went wrong."
+      render :new
+    end
   end
 
   def update
-  	@user.update(user_params)
-  	redirect_to @user, notice: "User successfully updated."
+  	if @user.update(user_params)
+    	redirect_to @user, notice: "User successfully updated."
+    else
+      flash[:alert] = "Something went wrong."
+      render :edit
+    end
   end
 
   def destroy
@@ -53,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:fname, :lname, :email, :password, :username, :about_me, :avatar)
+    params.require(:user).permit(:fname, :lname, :email, :password, :password_confirmation, :username, :about_me, :avatar)
   end
 
 end

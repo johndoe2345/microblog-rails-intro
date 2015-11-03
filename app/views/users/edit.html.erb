@@ -1,6 +1,12 @@
 <% if current_user and current_user.id.to_i == params[:id].to_i %>
 	<h1>Edit User</h1>
-
+	<% if @user.errors.full_messages.any? %>
+		<ul>
+			<% @user.errors.full_messages.each do |error_msg| %>
+				<li><%= error_msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
 	<%= render 'form' %>
 	<br />
 	If you would like to deactivate your account, keep in mind that it CANNOT be undone! We'd hate to see ya go, but if you really want to, then here ya go: 

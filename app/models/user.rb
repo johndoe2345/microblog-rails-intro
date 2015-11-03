@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 	has_many :posts
   has_many :follows, foreign_key: :follower_id
+  validates_presence_of :username, :password, :email
+  validates :password, confirmation: true
+  validates :username, uniqueness: true
 	has_attached_file :avatar, styles: { large: "600x600>", medium: "300x300>", thumb: "50x50#" }
 	# can also add after hash:
 	# , default_url: "/images/:style/missing.png"
