@@ -1,0 +1,10 @@
+<%= form_for [@post, @comment], html: { multipart: true } do |n| %>
+	
+	<%= n.label :body, 'Comment:' %>
+	<%= n.text_area :body, :maxlength => 150, rows: 7, cols: 30 %><br />
+
+	<%= n.label :image, 'Image:' %>
+	<%= n.file_field :image %><br />
+
+	<%= n.submit %>
+<% end %>

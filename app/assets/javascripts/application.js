@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+
+// $(document).ready(function() {
+// 	$(".follow-user").on("ajax:complete", function(e){
+// 		$(e.currentTarget).parent().html("Unfollow")
+// 	});
+// });
+
+// $(document).ready(function() {
+// 	$(".unfollow-user").on("ajax:complete", function(e){
+// 		$(e.currentTarget).parent().replaceWith("Follow")
+// 	});
+// });

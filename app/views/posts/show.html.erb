@@ -2,14 +2,32 @@
 <p><%=simple_format @post.body %></p>
 <% if @post.image.url(:medium) != '/images/medium/missing.png' %>
 	<%= image_tag @post.image.url(:medium) %>
-<% else %>
-	<% nil %>
 <% end %>
 <% if current_user && current_user.id == @post.user_id %>
 	<p><%= link_to 'edit', edit_post_path(@post) %> | 
 	<%= link_to 'delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %></p>
-<% else %>
-	<% nil %>
+<% end %>
+<ul>
+	<% @post.comments.each do |comment| %>
+		<li>
+			<%= link_to (image_tag comment.user.avatar.url(:thumb)), user_path(comment.user) %>
+			<%= link_to comment.user.full_name, user_path(comment.user) %>: 
+			<%= comment.body %>
+			<% if comment.image.url(:medium) != '/images/medium/missing.png' %>
+				<%= image_tag comment.image.url(:medium) %>
+			<% end %>
+		</li>
+	<% end %>
+</ul>
+<% if @comment.errors.full_messages.any? %>
+	<ul>
+		<% @comment.errors.full_messages.each do |error_msg| %>
+			<li><%= error_msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+<% if current_user %>
+	<p><%= render 'posts/comments/comment_form' %></p>
 <% end %>
 <hr>
 <%= link_to "to #{@post.user.full_name}'s profile", user_path(@post.user_id) %>

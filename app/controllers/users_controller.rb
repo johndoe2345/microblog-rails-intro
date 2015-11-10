@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :destroy, :follow, :unfollow]
+  before_action :set_user, only: [:edit, :update, :show, :destroy, :follow, :unfollow, :search]
 	# list all users
   def index
-  	@users = User.all
+  	if params[:query]
+      @users = User.where(["username = ? or fname = ? or lname = ? or username = ? or fname = ? or lname = ? or username = ? or fname = ? or lname = ? or username = ? or fname = ? or lname = ?", params[:query], params[:query], params[:query], params[:query].capitalize, params[:query].capitalize, params[:query].capitalize, params[:query].upcase, params[:query].upcase, params[:query].upcase, params[:query].downcase, params[:query].downcase, params[:query].downcase])
+    else
+      @users = User.all
+    end
   end
 
   def new
@@ -58,7 +62,11 @@ class UsersController < ApplicationController
   private
 
   def set_user
-  	@user = User.find(params[:id])
+    if !params[:id].nil?
+      @user = User.find(params[:id])
+    else
+      @user = User.find_by(username: params[:username])
+    end
   end
 
   def user_params

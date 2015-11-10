@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :users
-  resources :posts
+  resources :posts do 
+    resources :comments
+  end
+
+  get '/:username', to: 'users#show'
 
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
